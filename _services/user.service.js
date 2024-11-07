@@ -1,3 +1,6 @@
+import { requestOptions } from "~/_helpers/request-options";
+import { handleResponse } from "~/_helpers/handle-response";
+
 export const userService = {
   getAll,
   getById,
