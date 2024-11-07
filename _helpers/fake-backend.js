@@ -35,7 +35,7 @@ export function configureFakeBackend() {
             (x) =>
               x.username === params.username && x.password === params.password
           );
-          if (!user) return error("Username or password is incorrect");
+          if (!user) return error("Имя пользователя или пароль не корректны");
           return ok({
             id: user.id,
             username: user.username,

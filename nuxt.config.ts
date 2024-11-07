@@ -7,6 +7,14 @@ export default defineNuxtConfig({
     transpile: ["rxjs"],
   },
   modules: ["@vee-validate/nuxt"],
+  veeValidate: {
+    autoImports: true,
+    componentNames: {
+      Form: "VeeForm",
+      Field: "VeeField",
+      ErrorMessage: "VeeErrorMessage",
+    },
+  },
   plugins: ["~/plugins/fake-backend.js"],
   app: {
     head: {
