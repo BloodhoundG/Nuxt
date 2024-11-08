@@ -74,31 +74,47 @@ defineRule("required", (value) => {
   return true;
 });
 
+// имя пользователя
 const username = ref("");
+
+// пароль пользователя
 const password = ref("");
-const submitted = ref(false);
+
+// флаг true/false для прелоадера который появляется при отправке формы
 const loading = ref(false);
+
+// переменная для перенаправления пользователя после авторизации
 const returnUrl = ref("");
+
+// данные ошибки
 const error = ref("");
 
+// функция вызывается при отправке форму
 const onSubmit = async () => {
-  submitted.value = true;
+  // включается прелоадер
   loading.value = true;
 
+  // происходит авторизация по введённому логину и паролю
+  // если пользователь ввёл правильные данные происходит переход на другую страницу
   try {
     await authenticationService
       .login(username.value, password.value)
       .then((user) => navigateTo(returnUrl.value));
   } catch (err) {
+    // в случае ошибки она отобразится под формой
     error.value = err;
+  } finally {
+    // выключается прелоадер
     loading.value = false;
   }
 };
 
+// если авторизация прошла успешно перенаправляет на домашнюю страницу
 if (authenticationService.currentUserValue) {
   navigateTo("/");
 }
 
+// значение переменной становится равно текущему урлу или '/'
 returnUrl.value = useRoute().query.returnUrl || "/";
 </script>
 

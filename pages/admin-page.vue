@@ -17,11 +17,14 @@
 import { userService } from "../_services/user.service";
 import { Role } from "~/_helpers/role";
 
+// установка метаданных страницы
 definePageMeta({
   authorize: [Role.Admin],
 });
 
+// массив пользователей, которым доступна админка
 const users = ref([]);
 
+// функция достаёт всех пользователей которым доступна админка и заносит их в users.value
 userService.getAll().then((user) => (users.value = user));
 </script>
