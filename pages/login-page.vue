@@ -63,11 +63,15 @@
 import { authenticationService } from "../_services/authentication.service";
 import { defineRule, configure } from "vee-validate";
 
+definePageMeta({
+  middleware: ["auth"],
+});
+
 // глобальная установка параметра валидации текущего поля при каждом его изменении
 configure({ validateOnInput: true });
 
 // глобально определяю правило для обязательных полей
-defineRule("required", (value) => {
+defineRule("required", value => {
   if (!value || !value.length) {
     return "Обязательное поле";
   }
@@ -99,7 +103,7 @@ const onSubmit = async () => {
   try {
     await authenticationService
       .login(username.value, password.value)
-      .then((user) => navigateTo(returnUrl.value));
+      .then(user => navigateTo(returnUrl.value));
   } catch (err) {
     // в случае ошибки она отобразится под формой
     error.value = err;
@@ -110,9 +114,9 @@ const onSubmit = async () => {
 };
 
 // если авторизация прошла успешно перенаправляет на домашнюю страницу
-if (authenticationService.currentUserValue) {
-  navigateTo("/");
-}
+// if (authenticationService.currentUserValue) {
+//   navigateTo("/");
+// }
 
 // значение переменной становится равно текущему урлу или '/'
 returnUrl.value = useRoute().query.returnUrl || "/";

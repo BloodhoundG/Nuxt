@@ -20,6 +20,7 @@ import { Role } from "~/_helpers/role";
 // установка метаданных страницы
 definePageMeta({
   authorize: [Role.Admin],
+  middleware: ["auth"],
 });
 
 // массив пользователей, которым доступна админка

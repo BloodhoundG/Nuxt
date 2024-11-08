@@ -4,10 +4,16 @@
       <nav v-if="currentUser" class="navbar navbar-expand navbar-dark bg-dark">
         <div class="navbar-nav">
           <NuxtLink to="/" class="nav-item nav-link">Домашняя</NuxtLink>
-          <NuxtLink v-if="isAdmin" to="/admin-page" class="nav-item nav-link"
-            >Админка</NuxtLink
+          <NuxtLink v-if="isAdmin" to="/admin-page" class="nav-item nav-link">
+            Админка
+          </NuxtLink>
+          <a
+            v-if="currentUser"
+            @click.prevent="logout"
+            class="nav-item nav-link"
           >
-          <a @click="logout" class="nav-item nav-link">Войти</a>
+            Войти
+          </a>
         </div>
       </nav>
       <div class="jumbotron">
@@ -54,5 +60,5 @@ const logout = () => {
 };
 
 // подписка на currentUser для отслеживания изменения данных
-authenticationService.currentUser.subscribe((x) => (currentUser.value = x));
+authenticationService.currentUser.subscribe(x => (currentUser.value = x));
 </script>

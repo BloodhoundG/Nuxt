@@ -23,6 +23,7 @@ import { userService } from "~/_services/user.service";
 // установка метаданных страницы
 definePageMeta({
   authorize: [],
+  middleware: ["auth"],
 });
 
 // создание реактивной переменной для хранения данных текущего пользователя
@@ -37,5 +38,5 @@ const userFromApi = ref(null);
 // отправка запроса на фейковый бекенд
 userService
   .getById(currentUser.value.id)
-  .then((user) => (userFromApi.value = user));
+  .then(user => (userFromApi.value = user));
 </script>
