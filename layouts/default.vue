@@ -8,7 +8,7 @@
             Админка
           </NuxtLink>
           <a
-            v-if="currentUser"
+            v-if="!currentUser"
             @click.prevent="logout"
             class="nav-item nav-link"
           >
